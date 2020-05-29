@@ -1,8 +1,11 @@
 package cmd
 
 import (
-	"github.com/jpedrodelacerda/tupa/pkg/ignore"
+	"fmt"
 	"os"
+
+	"github.com/jpedrodelacerda/tupa/pkg/ignore"
+	"github.com/jpedrodelacerda/tupa/pkg/license"
 
 	"github.com/spf13/cobra"
 )
@@ -16,7 +19,9 @@ and items to be ignored on the .gitignore.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		createDirectory(args[0])
 
-		ignore.CreateGitIgnore(params, args[0])
+		ignore.CreateGitIgnore(ignoreParams, args[0])
+		license.CreateLicense(licenseName, args[0], author)
+		fmt.Printf("Project created!\nAuthor:\t\t%s\nLicense:\t%s\n", author, licenseName)
 	},
 }
 

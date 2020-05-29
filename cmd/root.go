@@ -30,8 +30,12 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
-var params string
+var (
+	cfgFile      string
+	ignoreParams string
+	author       string
+	licenseName  string
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -53,8 +57,12 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.tupa.yaml)")
-	rootCmd.PersistentFlags().StringVarP(&params, "ignore", "i", "", "parameters to be ignored by .gitignore.")
-	viper.BindPFlag("params", rootCmd.PersistentFlags().Lookup("params"))
+	rootCmd.PersistentFlags().StringVarP(&ignoreParams, "ignore", "i", "", "parameters to be ignored by .gitignore.")
+	rootCmd.PersistentFlags().StringVarP(&author, "author", "a", "", "author name for copyright")
+	rootCmd.PersistentFlags().StringVarP(&licenseName, "license", "l", "mit", "license to be chosen for the project")
+	viper.BindPFlag("ignore", rootCmd.PersistentFlags().Lookup("ignore"))
+	viper.BindPFlag("author", rootCmd.PersistentFlags().Lookup("author"))
+	viper.BindPFlag("license", rootCmd.PersistentFlags().Lookup("license"))
 }
 
 func initConfig() {

@@ -13,8 +13,6 @@ import (
 func CreateGitIgnore(params string, path string) error {
 	fullPath := filepath.Join(path, ".gitignore")
 
-	fmt.Println("fullPath: ", fullPath)
-
 	gi, err := FetchGitIgnore(params)
 	if err != nil {
 		return err
