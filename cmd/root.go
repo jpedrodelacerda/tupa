@@ -56,7 +56,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.tupa.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.tupa.yaml)")
 	rootCmd.PersistentFlags().StringVarP(&ignoreParams, "ignore", "i", "", "parameters to be ignored by .gitignore.")
 	rootCmd.PersistentFlags().StringVarP(&author, "author", "a", "", "author name for copyright")
 	rootCmd.PersistentFlags().StringVarP(&licenseName, "license", "l", "mit", "license to be chosen for the project")
@@ -76,7 +76,7 @@ func initConfig() {
 		}
 
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".tupa.yaml")
+		viper.SetConfigName(".tupa")
 	}
 
 	viper.AutomaticEnv()

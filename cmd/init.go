@@ -8,6 +8,7 @@ import (
 	"github.com/jpedrodelacerda/tupa/pkg/license"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var initCmd = &cobra.Command{
@@ -20,8 +21,8 @@ and items to be ignored on the .gitignore.`,
 		createDirectory(args[0])
 
 		ignore.CreateGitIgnore(ignoreParams, args[0])
-		license.CreateLicense(licenseName, args[0], author)
-		fmt.Printf("Project created!\nAuthor:\t\t%s\nLicense:\t%s\n", author, licenseName)
+		license.CreateLicense(licenseName, args[0], viper.GetString("author"))
+		fmt.Printf("Project created!\nAuthor:\t\t%s\nLicense:\t%s\n", viper.GetString("author"), viper.GetString("license"))
 	},
 }
 
